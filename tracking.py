@@ -5,7 +5,7 @@ def batch(frames, particle_diameter, particle_minmass):
     f = tp.batch(frames[:], diameter=particle_diameter, invert=True, minmass=particle_minmass)
     return f
 
-def track(f, particle_diameter, particle_minmass, filter_frame_number):
+def track(f, frames, particle_diameter, particle_minmass, filter_frame_number):
     """
 
     """
@@ -23,8 +23,9 @@ def track(f, particle_diameter, particle_minmass, filter_frame_number):
     tp.mass_size(t1.groupby('particle').mean()); # convenience function -- just plots size vs. mass
 
     # Filtering the data based on mass, size, and eccentricity.
-    t2 = t1[((t1['mass'] > particle_minmass) & (t1['size'] < 15) &
+    t2 = t1[((t1['mass'] > particle_minmass) & (t1['size'] < particle_diameter) &
             (t1['ecc'] < 0.2))]
+    
     plt.figure(2)
     plt.figure(figsize=(10, 8))
     tp.annotate(t2[t2['frame'] == 0], frames[0])
