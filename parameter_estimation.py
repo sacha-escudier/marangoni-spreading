@@ -3,9 +3,21 @@ import trackpy as tp
 import pims
 
 
-def parameter_estimation(
+def plot_parameter(
     directory, particle_diameter, particle_minmass, frame_number=-1
 ):
+    """
+    Plots the reference image, annotated image, mass histogram, and subpixel bias for a given frame.
+
+    Args:
+        directory (str): Path to the folder containing the frames.
+        particle_diameter (int): Diameter of the particles in pixels.
+        particle_minmass (int): Minimum mass of the particles.
+        frame_number (int): Index of the frame to analyze.
+
+    Returns:
+        pims.Frames: The frames object containing the images
+    """
 
     # Relevant path, CHANGE WITH THE VIDEO YOU WANT TO ANALYZE
 
@@ -30,9 +42,11 @@ def parameter_estimation(
     tp.annotate(f, frames[frame_number], plot_style={"markersize": 2})
 
     plt.figure(3)
-    fig, ax = plt.subplots()
+    _, ax = plt.subplots()
     ax.hist(f["mass"], bins=20)
     ax.set(xlabel="mass", ylabel="count")
 
     plt.figure(4)
     tp.subpx_bias(f)
+
+    return frames
