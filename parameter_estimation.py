@@ -32,14 +32,15 @@ def plot_parameter(
     plt.show()
 
     plt.figure(2)
+    plt.figure(figsize=(10, 8))
     f = tp.locate(
         frames[frame_number],
         diameter=particle_diameter,
         invert=True,
         minmass=particle_minmass,
     )  # Tweak this! Always keep invert=True (since particles are very dark)
-    plt.figure(figsize=(10, 8))
     tp.annotate(f, frames[frame_number], plot_style={"markersize": 2})
+    plt.show()
 
     plt.figure(3)
     _, ax = plt.subplots()
