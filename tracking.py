@@ -71,7 +71,7 @@ def track(
 
     # Linking particles between frames, and filtering out particles that are not present in enough frames.
     trajectories = tp.link(
-        batched_frames, search_range=2, memory=0 # For D = 35mm, I had memory=(particle_diameter // 3)
+        batched_frames, search_range=2, memory=5 # For D = 35mm, I had memory=(particle_diameter // 3)
     )  # Particles may not travel more than 15 pixels between frames, and may be missing for 5 frames at most.
     pre_filtered_trajectories = tp.filter_stubs(
         trajectories, filter_frame_number
