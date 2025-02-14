@@ -66,7 +66,7 @@ def batch(frames, particle_diameter, particle_minmass, save_video=False, output_
 def track(
     batched_frames, frames, particle_diameter, particle_minmass, filter_frame_number, save_video=False, output_path=None):
     """
-    
+
     """
 
     # Linking particles between frames, and filtering out particles that are not present in enough frames.
