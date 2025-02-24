@@ -1,5 +1,10 @@
 # marangoni-spreading
 
+## Relevevant MetaData:
+Black Paramagnetic Polyethylene Microspheres
+rho = 1.2 g/cm^3
+d = 425 - 500 um
+
 
 ## Parameters for D=35mm:
 last_frame = 150
