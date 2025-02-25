@@ -11,8 +11,8 @@ def plot_parameter(
 
     Args:
         directory (str): Path to the folder containing the frames.
-        particle_diameter (int): Diameter of the particles in pixels.
-        particle_minmass (int): Minimum mass of the particles.
+        particle_diameter (int): Approximate diameter of the particles in pixels.
+        particle_minmass (int): Minimum 'brightness' of the particles.
         frame_number (int): Index of the frame to analyze.
 
     Returns:
@@ -42,10 +42,10 @@ def plot_parameter(
     tp.annotate(f, frames[frame_number], plot_style={"markersize": 2})
     plt.show()
 
-    plt.figure(3)
-    _, ax = plt.subplots()
-    ax.hist(f["mass"], bins=20)
-    ax.set(xlabel="mass", ylabel="count")
+    # plt.figure(3) # Commented out here, not strictly necessary
+    # _, ax = plt.subplots()
+    # ax.hist(f["mass"], bins=20)
+    # ax.set(xlabel="mass", ylabel="count")
 
     plt.figure(4)
     tp.subpx_bias(f)

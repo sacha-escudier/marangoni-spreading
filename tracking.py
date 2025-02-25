@@ -14,8 +14,8 @@ def batch(frames, particle_diameter, particle_minmass, save_video=False, output_
 
     Args:
         frames (pims.Frames): Frames object containing the images.
-        particle_diameter (int): Diameter of the particles in pixels.
-        particle_minmass (int): Minimum mass of the particles.
+        particle_diameter (int): Approximate diameter of the particles in pixels.
+        particle_minmass (int): Minimum 'brightness' of the particles.
         save_video (bool): Whether to save the annotated frames as a TIFF stack.
         output_path (str): Directory where the annotated frames TIFF will be saved if save_video is True.
 
@@ -71,8 +71,7 @@ def track(
 
     # Linking particles between frames, and filtering out particles that are not present in enough frames.
     trajectories = tp.link(
-        batched_frames, search_range=2, memory=5 # For D = 35mm, I had memory=(particle_diameter // 3)
-    )  # Particles may not travel more than 15 pixels between frames, and may be missing for 5 frames at most.
+        batched_frames, search_range=particle_diameter // 2, memory=5)  # Particles may not travel more than 15 pixels between frames, and may be missing for 5 frames at most.
     pre_filtered_trajectories = tp.filter_stubs(
         trajectories, filter_frame_number
     )  # Keep trajectories that only last filter_frame_number of frames
@@ -85,8 +84,8 @@ def track(
     # Filtering the data based on mass, size, and eccentricity.
     filtered_trajectories = pre_filtered_trajectories[
         (
-            (pre_filtered_trajectories["mass"] > particle_minmass)
-            & (pre_filtered_trajectories["size"] < particle_diameter)
+            (pre_filtered_trajectories["mass"] > particle_minmass // 2)
+            & (pre_filtered_trajectories["size"] < 4)
             & (pre_filtered_trajectories["ecc"] < 0.2)
         )
     ]
