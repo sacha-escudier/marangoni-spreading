@@ -38,12 +38,7 @@ trajectories = tp.link(
         batched_frames, search_range=2, memory=0 )
 
 
-## Parameters for deep-dish, H (depth) = 4cm
-Depth of fluid = 4 cm
-last_frame = 
-diameter = 11
-mass = 2200
-x_c = 925
-y_c = 524
-trajectories = tp.link(
-        batched_frames, search_range=particle_diameter // 2, memory=5)
+## Parameters for deep-dish, H (depth) = 4cm/1cm
+Diameter = 9.5 +- 0.05 cm
+Total height = 4.9 +- 0.05 cm
+Depth of fluid = 4 cm/ 1cm (see notebook)
