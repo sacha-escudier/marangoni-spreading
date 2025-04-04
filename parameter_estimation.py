@@ -42,7 +42,7 @@ def plot_parameter(
         invert=False,
         minmass=particle_minmass,
     )  # Tweak this! Always keep invert=True (since particles are very dark)
-    tp.annotate(f, frames,invert=True, plot_style={"markersize": 30})
+    tp.annotate(f, frames,invert=False, plot_style={"markersize": 30})
     plt.show()
 
     plt.figure(3) # Commented out here, not strictly necessary
