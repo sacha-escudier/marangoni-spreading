@@ -89,7 +89,7 @@ def track(
             & (pre_filtered_trajectories["ecc"] < 0.2)
         )
     ]
-
+    
     plt.figure(2)
     plt.figure(figsize=(10, 8))
     tp.annotate(

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import trackpy as tp
 import pims
+import numpy as np
 
 
 def plot_parameter(
@@ -21,31 +22,33 @@ def plot_parameter(
 
     # Relevant path, CHANGE WITH THE VIDEO YOU WANT TO ANALYZE
 
-    frames = pims.open(directory + "*.jpg")
+    frames = pims.open(directory)
 
     # Reference image and annoated image, USE THIS TO DETERMINE WHAT COMBINATION OF DIAMETER AND MINMASS WORKS
 
     plt.figure(1)
     plt.figure(figsize=(10, 8))
-    plt.imshow(frames[frame_number], cmap="gray")
+    frames  = np.squeeze(frames) 
+
+    plt.imshow(frames, cmap="gray")
     plt.tight_layout()
     plt.show()
 
     plt.figure(2)
     plt.figure(figsize=(10, 8))
     f = tp.locate(
-        frames[frame_number],
+        frames,
         diameter=particle_diameter,
-        invert=True,
+        invert=False,
         minmass=particle_minmass,
     )  # Tweak this! Always keep invert=True (since particles are very dark)
-    tp.annotate(f, frames[frame_number], plot_style={"markersize": 2})
+    tp.annotate(f, frames,invert=True, plot_style={"markersize": 30})
     plt.show()
 
-    # plt.figure(3) # Commented out here, not strictly necessary
-    # _, ax = plt.subplots()
-    # ax.hist(f["mass"], bins=20)
-    # ax.set(xlabel="mass", ylabel="count")
+    plt.figure(3) # Commented out here, not strictly necessary
+    _, ax = plt.subplots()
+    ax.hist(f["mass"], bins=20)
+    ax.set(xlabel="mass", ylabel="count")
 
     plt.figure(4)
     tp.subpx_bias(f)
